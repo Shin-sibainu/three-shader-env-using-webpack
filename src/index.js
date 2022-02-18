@@ -3,11 +3,16 @@ import fragmentShader from "./shader/fragmentShader";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-/**
- * Base
- */
-// Debug
+// デバッグ
 // const gui = new dat.GUI();
+
+/**
+ * Sizes
+ */
+const sizes = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+};
 
 // Canvas
 const canvas = document.querySelector(".webgl");
@@ -20,9 +25,6 @@ const scene = new THREE.Scene();
  */
 const textureLoader = new THREE.TextureLoader();
 
-/**
- * Test mesh
- */
 // Geometry
 const geometry = new THREE.PlaneGeometry(1, 1, 32, 32);
 
@@ -35,14 +37,6 @@ const material = new THREE.RawShaderMaterial({
 // Mesh
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
-
-/**
- * Sizes
- */
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-};
 
 window.addEventListener("resize", () => {
   // Update sizes
@@ -58,10 +52,7 @@ window.addEventListener("resize", () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-/**
- * Camera
- */
-// Base camera
+// Camera
 const camera = new THREE.PerspectiveCamera(
   75,
   sizes.width / sizes.height,
@@ -89,7 +80,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 const clock = new THREE.Clock();
 
-const tick = () => {
+const animate = () => {
   const elapsedTime = clock.getElapsedTime();
 
   // Update controls
@@ -98,8 +89,7 @@ const tick = () => {
   // Render
   renderer.render(scene, camera);
 
-  // Call tick again on the next frame
-  window.requestAnimationFrame(tick);
+  window.requestAnimationFrame(animate);
 };
 
-tick();
+animate();

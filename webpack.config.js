@@ -24,7 +24,8 @@ module.exports = {
       {
         //拡張子が.glsl .vert .fragの場合
         test: /\.(glsl|vert|frag)$/,
-        use: "shader-loader",
+        // use: "shader-loader",
+        type: "asset/source",
       },
     ],
   },
